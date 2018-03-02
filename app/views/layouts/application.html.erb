@@ -9,6 +9,23 @@
   </head>
 
   <body>
+    <div>
+      <% if current_user %>
+        <a href="<%= logout_path %>" data-method='delete'>Logout</a>
+        <a href="<%= users_path %>">Homepage</a>
+        <a href="<%= user_path current_user %>">Dashboard</a>
+      <% else %>
+        <a href="<%= login_path %>">Login</a>
+      <% end %>
+
+    </div>
+
     <%= yield %>
+
+    <% if flash[:errors] %>
+      <% flash[:errors].each do |error| %>
+        <p><%= error %></p>
+      <% end %>
+    <% end %>
   </body>
 </html>
